@@ -202,8 +202,9 @@ class PlexMediaMeta(BaseModel):
                 languages += f' ({"/".join(sorted(subtitles_languages))})'
 
             quality_description = f'Direct Play {media.get("videoResolution", "")}'
+            filename_without_spaces = filename.replace(' ', '.')
             path = media['Part'][0]['key']
-            path = path.rsplit('/', 1)[0] + f"/{filename}"
+            path = path.rsplit('/', 1)[0] + f"/{filename_without_spaces}"
             streams.append(
                 StremioStream(
                     name=name,
