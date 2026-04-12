@@ -202,6 +202,8 @@ class PlexMediaMeta(BaseModel):
                 languages += f' ({"/".join(sorted(subtitles_languages))})'
 
             quality_description = f'Direct Play {media.get("videoResolution", "")}'
+            path = media['Part'][0]['key']
+            path = path.rsplit('/', 1)[0] + f"/{filename}"
             streams.append(
                 StremioStream(
                     name=name,
@@ -212,7 +214,7 @@ class PlexMediaMeta(BaseModel):
                     ),
                     url=str(
                         configuration.streaming_url
-                        / media['Part'][0]['key'][1:]
+                        / path[1:]
                         % {
                             'X-Plex-Token': configuration.access_token,
                         },
