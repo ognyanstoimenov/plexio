@@ -198,8 +198,6 @@ class PlexMediaMeta(BaseModel):
 
             description_template = '{filename}\n{quality}\n{languages}'
             languages = '/'.join(sorted(audio_languages))
-            if subtitles_languages:
-                languages += f' ({"/".join(sorted(subtitles_languages))})'
 
             quality_description = f'Direct Play {media.get("videoResolution", "")}'
             filename_without_spaces = filename.replace(' ', '.')
